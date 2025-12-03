@@ -1,0 +1,97 @@
+#include "Title.h"
+#include "GameScene.h"
+#include "Input/Input.h"
+#include "Game.h"
+
+
+Title::Title(){
+}
+
+Title::~Title(){
+}
+
+bool Title::Initialize(){
+
+	//“V‹…
+<<<<<<< HEAD
+	//titleBG = NEW Object();
+	//titleBG->Load("Assets/stage/skydome/titleSky.fbx");
+	//titleBG->Initialize();
+	//titleBG->SetScale(tSkySize);
+=======
+	titleBG = NEW Object();
+	titleBG->Load("Assets/stage/skydome/titleSky.fbx");
+	titleBG->Initialize();
+	titleBG->SetScale(tSkySize);
+>>>>>>> 5f74db271206c087b59a08f0497b7437e0280130
+
+	logo = NEW _2DUI();
+	logo->Initialize("Assets/UI/title_logo.png", LogoSizeX, LogoSizeY, Vector3(LogoX, LogoY, NULL));
+
+	start = NEW _2DUI();
+	start->Initialize("Assets/UI/START.png", StartSizeX, StartSizeY, Vector3(StartBottonX, StartBottonY, NULL));
+
+	end = NEW _2DUI();
+	end->Initialize("Assets/UI/END.png", EndSizeX, EndSizeY, Vector3(EndBottonX, EndBottonY, NULL), 0.8f);
+
+	ChangingSize = NEW Easing(Easing::STATE::EASEOUTCUBIC, ChangingSpeed, 0, false);
+
+	SelectEffect = NEW _2DUI();
+	SelectEffect->Initialize("Assets/Effect/particle.png", SelectH, SelectW, Vector3(SelectX, SelectY, NULL), 1.0f, true);
+
+	return false;
+}
+
+void Title::Release(){
+	delete ChangingSize;
+<<<<<<< HEAD
+	//delete titleBG;
+=======
+	delete titleBG;
+>>>>>>> 5f74db271206c087b59a08f0497b7437e0280130
+	delete logo;
+	delete start;
+	delete end;
+	delete SelectEffect;
+}
+
+void Title::Update() {
+
+	ChangingSize->RateUpdate();
+	SelectEffect->SetChangingSize(true);
+
+	if (Input::Key_Pad_Push('S', Input::BUTTON::DOWN) && PlayFlag == true) {
+		SelectEffect->SetPosition(Vector3(SelectX2, SelectY2, NULL));
+		PlayFlag = false;
+	}
+	else if (Input::Key_Pad_Push('W', Input::BUTTON::DOWN) && PlayFlag == false) {
+		SelectEffect->SetPosition(Vector3(selectX, selectY, NULL));
+		PlayFlag = true;
+	}
+
+	if (Input::Key_Pad_Push(VK_RETURN, Input::BUTTON::A) && PlayFlag ==true){
+		GetGameScene()->JumpScene(NEW GameScene);
+		//ChangingSize->SetIsOn(false);
+	}
+	else if(Input::Key_Pad_Push(VK_RETURN, Input::BUTTON::A) && PlayFlag == false){
+		exit(NULL);
+	}
+	/*if (ChangingSize->GetIsMinRate()) {
+		GetGameScene()->JumpScene(NEW GameScene);
+	}*/
+}
+
+void Title::Render(){
+	//shader->Activate();
+	//Shader::SetTransform(titleBG->GetTransForm());
+<<<<<<< HEAD
+	//titleBG->Render();
+=======
+	titleBG->Render();
+>>>>>>> 5f74db271206c087b59a08f0497b7437e0280130
+	logo->Render();
+	start->Render();
+	end->Render();
+	SelectEffect->Render();
+
+}
